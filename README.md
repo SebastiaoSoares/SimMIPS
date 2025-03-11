@@ -27,6 +27,7 @@ Até o momento, o SimMIPS suporta as seguintes instruções:
 - `beq`     (OPCODE: 000101)
 - `lw`      (OPCODE: 000111)
 - `sw`      (OPCODE: 001000)
+- `bne`     (OPCODE: 001001)
 
 ### Tipo J
 - `jump`    (OPCODE: 000110)
