@@ -3,10 +3,21 @@
 SimMIPS é um microprocessador programável desenvolvido no **Logisim**, baseado em uma arquitetura inspirada no **MIPS**. O projeto tem como objetivo explorar conceitos de arquitetura de computadores, instruções RISC e implementação de processadores no ambiente de simulação do Logisim.
 
 ## Sumário
+- [Equipe](#equipe);
 - [Instruções já implementadas](#instruções-já-implementadas);
 - [Como usar](#como-usar);
 - [O circuito](#o-circuito);
 - [Em desenvolvimento](#em-desenvolvimento);
+
+## Equipe
+A equipe do trabalho elaborado na disciplina de Arquitetura e Organização de Computadores, do curso de Ciência da Computação da Universidade Federal do Cariri (UFCA), é composta pelos seguintes membros:
+
+**Estudantes:**
+- Sebastião Sousa Soares
+- Bruno da Silva Macedo
+
+**Professor:**
+- Ramon Nepomuceno
 
 ## Instruções já implementadas  
 Até o momento, o SimMIPS suporta as seguintes instruções:  
