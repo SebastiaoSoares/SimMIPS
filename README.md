@@ -29,6 +29,7 @@ Até o momento, o SimMIPS suporta as seguintes instruções:
 - `div`     (FUNCT: 000011)
 - `and`     (FUNCT: 000100)
 - `or`      (FUNCT: 000101)
+- `slt`     (FUNCT: 000110)
 
 ### Tipo I
 - `addi`    (OPCODE: 000001)
@@ -39,6 +40,7 @@ Até o momento, o SimMIPS suporta as seguintes instruções:
 - `lw`      (OPCODE: 000111)
 - `sw`      (OPCODE: 001000)
 - `bne`     (OPCODE: 001001)
+- `slti`    (OPCODE: 001010)
 
 ### Tipo J
 - `jump`    (OPCODE: 000110)
@@ -64,7 +66,13 @@ $t0 = $t1 + 5   # 000001 00001 00000 0000000000000101 (bin) | 04200005 (hex)
 3. Execute o processador e observe os resultados nos registradores e na memória  
 
 ## O circuito
-*EM DESENVOLVIMENTO*
+
+### Instruções do Tipo R
+*add, sub, mul, div, and, or, slt*
+
+Essas instruções são efetuadas, de modo geral, dentro da ULA (Unidade Lógica Aritmética). A UC (Unidade de Controle) envia a informação de que está sendo efetuada uma instrução do tipo R (opcode "000000"), que, por sua vez, espera um RS e um RT, para efetuar a operação desejada (indicada pelo funct específico), um RD para armazenar o resultado e o funct. Do funct é extraída a menor quantidade de bits necessária para indicar a um MUX qual função deve ser escolhida para ser registrada em RD.
+
+As instruções add, sub, mul e div, utilizam suas operações específicas. And e or utilizam as portas lógicas correspondentes. Por fim, slt faz uso do comparador de magnitude. Todos dentro da ULA.
 
 ## Em desenvolvimento  
 - Expandindo o conjunto de instruções
