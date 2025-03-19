@@ -16,6 +16,12 @@ SimMIPS é um microprocessador programável desenvolvido no **Logisim**, baseado
   - [Como usar](#como-usar)
   - [O circuito](#o-circuito)
     - [Novas instruções](#novas-instruções)
+      - [**AND e OR**](#and-e-or)
+      - [**BNE**](#bne)
+      - [**SLTI**](#slti)
+      - [**SLT**](#slt)
+      - [**JR e JAL**](#jr-e-jal)
+      - [**SLL e SLR**](#sll-e-slr)
     - [Componentes](#componentes)
 
 ## Equipe
@@ -97,20 +103,19 @@ $t1 = $t0 + 5   # 000001 00001 00000 0000000000000101 (bin) | 04200005 (hex)
 
 Nesta seção, explicamos as principais instruções adicionadas na última atualização do SimMIPS:
 
-**AND e OR**
+#### **AND e OR**
 As instruções AND e OR são do tipo R e operam diretamente na ULA. Quando a UC identifica o opcode 000000, ela verifica o campo FUNCT para determinar a operação lógica a ser executada. Ambas recebem RS e RT como operandos, e o resultado é armazenado em RD. O circuito da ULA foi expandido com um terceiro bit de controle para suportar essas operações adicionais. O MUX interno à ULA, responsável pela seleção da operação, foi ajustado para acomodar esse novo bit, permitindo a execução correta das operações lógicas.
 
-**BNE**
+#### **BNE**
 A instrução BNE (Branch Not Equal) é do tipo I e realiza um desvio condicional baseado na desigualdade entre os valores de RS e RT. Quando a UC detecta o opcode 001001, o comparador de magnitude da ULA é ativado para verificar se os valores são diferentes. Se forem, a UC gera um sinal de controle que permite atualizar o PC com o endereço de destino, calculado a partir do deslocamento imediato. A implementação reutiliza o circuito do BEQ, adicionando apenas uma inversão lógica na saída do comparador. O sinal de controle da atualização do PC, antes denominado BEQ_ADDRS, foi renomeado para BEQ/BNE_ADDRS para refletir essa mudança.
 
-**SLTI**
+#### **SLTI**
 A instrução SLTI (Set Less Than Immediate) é do tipo I e compara o valor armazenado em RS com um imediato de 16 bits. Caso RS seja menor que o imediato, o registrador RT recebe o valor 1; caso contrário, recebe 0. Para viabilizar essa operação, a UC foi ajustada para gerar um sinal de controle adicional de três bits para a ULA, compatível com a nova configuração do seletor de operações, permitindo a distinção dessa comparação específica.
 
-**SLT**
+#### **SLT**
 A instrução SLT (Set Less Than) é do tipo R e opera de forma semelhante à SLTI, mas comparando os valores armazenados em RS e RT em vez de um imediato. O comparador de magnitude da ULA realiza a operação, e o resultado (1 ou 0) é armazenado em RD. A funcionalidade foi incorporada à ULA como parte da ampliação do MUX de seleção de operações.
 
-**JR e JAL**
-
+#### **JR e JAL**
 O circuito de salto foi aprimorado para lidar com instruções do tipo J, distinguindo internamente entre JUMP, JR e JAL. A diferenciação entre essas instruções é utilizada para definir comportamentos específicos, como:
 
 No banco de registradores, para armazenar PC+4 em BR[31] (JAL);
@@ -118,8 +123,7 @@ Para carregar o valor de RS como destino do salto (JR);
 Para definir corretamente o endereço de salto (J_ADDRS), garantindo a execução precisa de cada instrução.
 O mecanismo de salto do JUMP foi reaproveitado para gerenciar os saltos de JR e JAL, minimizando a complexidade do circuito.
 
-**SLL e SLR**
-
+#### **SLL e SLR**
 As instruções SLL (Shift Left Logical) e SLR (Shift Right Logical) realizam deslocamentos lógicos dentro da ULA. O controle da operação é feito pelo OPCODE, enquanto a quantidade de deslocamentos é determinada pelo campo SHAMT da instrução. Internamente, o circuito da ULA contém um MUX de seleção de operação com oito entradas: add, sub, mul, div, and, or, slt e shift. A entrada correspondente ao deslocamento foi integrada ao MUX, permitindo que a lógica de shift seja ativada conforme a necessidade. Como o código FUNCT para ambas as operações é o mesmo, a UC diferencia SLL e SLR exclusivamente pelo OPCODE, garantindo o comportamento correto da ULA.
 
 ### Componentes
