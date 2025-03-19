@@ -129,19 +129,19 @@ As instruções SLL (Shift Left Logical) e SLR (Shift Right Logical) realizam de
 ### Componentes
 
 **Circuito Principal (*main*)**
-<img src="docs/main.png" width="50%"/>
+<br><img src="docs/main.png" width="50%"/><br>
 Esse é o cicuito responsável por abrigar toda a lógica e os demais componentes do SimMIPS, incluindo: BR, UC, ULA, Memória de Dados (MD) e Memória de Instruções.
 
 **Banco de Registradores (*BR*)**
-<img src="docs/main.png" width="50%"/>
+<br><img src="docs/banco-de-registradores.png" width="500px"/><br>
 É onde estão contidos os 32 registradores que permitem as lógicas de manipulação de valores pelas instruções. Possui as entradas RS, RT, RD, DIN, CLK e WR, além das saídas BR[RS] e BR[RT].
 
 **Unidade de Controle (*UC*)**
-<img src="docs/UC.png" height="50%"/>
+<br><img src="docs/UC.png" height="600px"/><br>
 Componente que recebe os 6 bits do OPCODE das instruções e revela os principais comandos a serem executados, sendo eles: WR (habilita escrita no BR), BEQ, BNE, ULASRC, REGDEST (habilita RT como reg. de destino), J (indica se envolve salto do tipo J), ULAOP00, ULAOP01 e ULAOP10 (que indicam a operação da ULA, quando envolver um imediato), ULAOPSRC (indica se usará ULAOP ou FUNCT), MUX_DIN (se o reg. de destino recebe a saída da ULA ou da MD), MEM_WR (que habilita escrita na MD).
 
 **Unidade Lógica e Aritmética (*ULA*)**
-<img src="docs/ULA.png" width="50%"/>
+<br><img src="docs/ULA.png" width="50%"/><br>
 Componente responsável por receber BR[RS] e BR[RT], calcular conforme operação solicitada (operações básicas, operações com imediato, or, and, slt, slti e deslocamentos) e tem duas saídas: EQUAL (se os valores da entrada são iguais) e ULA_OUT (resultado). Opera com o FUNCT ou ULAOP. Possui um MUX para escolher dentre os possíveis resultados.
 
 ---
